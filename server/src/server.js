@@ -12,8 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    credentials: true,
+    origin: ["http://localhost:5173", "https://klp-neon.vercel.app"],
   }),
 );
 
@@ -23,10 +22,9 @@ async function connectDB() {
 }
 connectDB();
 
-app.get("/", (req,res) => {
+app.get("/", (req, res) => {
   res.send("Server is running");
-})
-
+});
 
 app.post("/api/set-data", async (req, res) => {
   const { username, password } = req.body;
