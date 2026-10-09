@@ -10,13 +10,24 @@ const userModel = require("./data.model.js");
 
 const app = express();
 app.use(express.json());
+
+const allowedOrigins = ["http://localhost:5173", "https://klp-neon.vercel.app"];
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://klp-neon.vercel.app",
-      "https://klp-pogbrrxn3-mayur-s-projects-c3c38888.vercel.app",
-    ],
+    origin: (origin, callback) => {
+      if (
+        !origin ||
+        allowedOrigins.includes(origin) ||
+        /^https:\/\/klp-[a-z0-9]+-mayur-s-projects-c3c38888\.vercel\.app$/.test(
+          origin,
+        )
+      ) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Origin not allowed by CORS"));
+    },
   }),
 );
 
