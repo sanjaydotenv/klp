@@ -23,6 +23,11 @@ async function connectDB() {
 }
 connectDB();
 
+app.get("/", (req,res) => {
+  res.send("Server is running");
+})
+
+
 app.post("/api/set-data", async (req, res) => {
   const { username, password } = req.body;
   console.log(username, password);
