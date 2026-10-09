@@ -12,7 +12,11 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://klp-neon.vercel.app"],
+    origin: [
+      "http://localhost:5173",
+      "https://klp-neon.vercel.app",
+      "https://klp-pogbrrxn3-mayur-s-projects-c3c38888.vercel.app",
+    ],
   }),
 );
 
