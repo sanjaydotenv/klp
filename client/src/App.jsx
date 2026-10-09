@@ -9,7 +9,7 @@ export default function App() {
 
   const setDataAPI = async (data) => {
     try {
-      const res = await axios.post(`${API_URL}/set-data`, data);
+      const res = await axios.post(`${API_URL}/api/set-data`, data);
       console.log("Data saved successfully:", res.data);
       return res.data;
     } catch (error) {
