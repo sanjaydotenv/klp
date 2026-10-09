@@ -5,14 +5,28 @@ export default function App() {
   const [submitted, setSubmitted] = useState(false);
   const [formData, setformData] = useState(null);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   const setDataAPI = async (data) => {
-    const res = await axios.post("http://localhost:3000/api/set-data", data);
+    try {
+      const res = await axios.post(`${API_URL}/set-data`, data);
+      console.log("Data saved successfully:", res.data);
+      return res.data;
+    } catch (error) {
+      console.error("API Error:", error.response?.data || error.message);
+      throw error;
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setDataAPI(formData);
-    setSubmitted(true);
+
+    try {
+      await setDataAPI(formData);
+      setSubmitted(true);
+    } catch (error) {
+      setSubmitted(false);
+    }
   };
 
   const handleChange = (e) => {
